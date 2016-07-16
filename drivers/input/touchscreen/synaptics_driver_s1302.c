@@ -299,6 +299,7 @@ struct synaptics_ts_data {
 	char fw_id[12];
 	char manu_name[12];
 
+
 	struct work_struct pm_work;
 };
 
