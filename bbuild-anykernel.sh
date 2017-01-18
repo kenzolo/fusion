@@ -110,6 +110,7 @@ step1_make_clean()
 	# jump to build path and make clean
 	cd $BUILD_PATH
 	make clean
+	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
 
 step2_make_config()
@@ -135,6 +136,7 @@ step2_make_config()
 	cd $BUILD_PATH
 	echo "Makestring: $MAKESTRING"
 	make $MAKESTRING
+	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
 
 step3_compile()
@@ -185,6 +187,7 @@ step3_compile()
 	echo "toolchain compile:" >> ../compile.log
 	grep "^CROSS_COMPILE" $BUILD_PATH/Makefile >> ../compile.log
 	echo "toolchain stripping:" $TOOLCHAIN >> ../compile.log
+	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
 
 step4_prepare_anykernel()
@@ -248,6 +251,7 @@ step4_prepare_anykernel()
 	sed -i "s;###kernelname###;${KERNELNAME};" META-INF/com/google/android/update-binary;
 	COPYRIGHT="(c) Lord Boeffla (aka andip71), $(date +%Y.%m.%d-%H:%M:%S)"
 	sed -i "s;###copyright###;${COPYRIGHT};" META-INF/com/google/android/update-binary;
+	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
 
 step5_create_anykernel_zip()
@@ -276,6 +280,7 @@ step5_create_anykernel_zip()
 
 	cp $BOEFFLA_FILENAME.recovery.zip cm-kernel.zip
 	md5sum cm-kernel.zip > checksum
+	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
 
 step7_analyse_log()
