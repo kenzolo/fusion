@@ -10,7 +10,8 @@
 # Parameters to be configured manually
 #######################################
 
-BOEFFLA_VERSION="1.0-test-Lineage14.1-OnePlus3T"
+
+BOEFFLA_VERSION="UNOFFICIAL-Fusion-1.5"
 
 TOOLCHAIN="/home/kenzolo/Rom/tool/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
 ARCHITECTURE=arm64
