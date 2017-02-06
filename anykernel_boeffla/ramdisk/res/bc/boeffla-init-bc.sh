@@ -64,6 +64,10 @@
 	# Sdcard buffer tweaks default to 1024 kb
 	echo 1024 > /sys/block/sda/queue/read_ahead_kb
 	/sbin/busybox sync
+	
+	# blu_active governor
+	echo "blu_active" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
+	echo "blu_active" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor 
 
 	# Ext4 tweaks default to on
 	/sbin/busybox sync
