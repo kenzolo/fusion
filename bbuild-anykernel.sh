@@ -11,7 +11,7 @@
 #######################################
 
 
-BOEFFLA_VERSION="UNOFFICIAL-Fusion-2.4"
+BOEFFLA_VERSION="UNOFFICIAL-Fusion-2.5"
 
 TOOLCHAIN="/home/kenzolo/Rom/tool/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
 ARCHITECTURE=arm64
