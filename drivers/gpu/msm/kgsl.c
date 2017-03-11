@@ -347,6 +347,7 @@ static int kgsl_mem_entry_track_gpuaddr(struct kgsl_device *device,
 	if (kgsl_memdesc_use_cpu_map(&entry->memdesc))
 		return 0;
 
+
 	pagetable = kgsl_memdesc_is_secured(&entry->memdesc) ?
 		device->mmu.securepagetable : process->pagetable;
 

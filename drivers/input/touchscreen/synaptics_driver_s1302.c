@@ -309,9 +309,9 @@ struct synaptics_ts_data {
 	char fw_id[12];
 	char manu_name[12];
 
+
 	bool stop_keypad;
 	struct work_struct pm_work;
-
 };
 
 
