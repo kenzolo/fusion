@@ -11,7 +11,7 @@
 #######################################
 
 
-BOEFFLA_VERSION="UNOFFICIAL-Fusion-3.0"
+BOEFFLA_VERSION="UNOFFICIAL-Fusion-3.1"
 
 TOOLCHAIN="/home/kenzolo/Rom/tool/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
 ARCHITECTURE=arm64
@@ -229,6 +229,7 @@ step4_prepare_anykernel()
 
 		# copy generated modules
 		find $BUILD_PATH -name '*.ko' -exec cp -av {} $MODULES_PATH \;
+		cp /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3/anykernel_boeffla/ramdisk/res/bc/boeffla-init-bc.sh /home/kenzolo/Rom/boeffla/repack/modules/boeffla-init-bc.sh
 
 		# copy static modules and rename from ko_ to ko, only if there are some
 		if [ "$(ls -A $BUILD_PATH/modules_boeffla)" ]; then

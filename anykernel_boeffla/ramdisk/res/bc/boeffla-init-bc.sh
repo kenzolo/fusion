@@ -1,5 +1,8 @@
 #!/system/bin/sh
 
+# Wait for some time to ensure rom is fully initialized
+	/sbin/busybox sleep 35
+
 # *******************************
 # BC-based initialization
 #
@@ -65,39 +68,60 @@
 	echo 1024 > /sys/block/sda/queue/read_ahead_kb
 	/sbin/busybox sync
 	
+    # Change GPU initial power level from level 6 to level 7 for power savings
+		echo "7" > /sys/class/kgsl/kgsl-3d0/default_pwrlevel 
+		
+    # Boot Frequency
+		echo "1516800" >  /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+		echo "1516800" >  /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+		echo "2150400" >  /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+		echo "2150400" >  /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+		
+    # Gpu Frequency
+		echo "624000000" >  /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    
+
+		
+    # Input boost configuration
+		echo "0:1056000 2:1056000" > /sys/module/cpu_boost/parameters/input_boost_freq
+		echo "500" > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo "1" > /sys/class/misc/touchboost_switch/touchboost__switch
+        echo "1" > /sys/class/misc/touchboost_switch/touchboost__switch_2
+		echo "1056000" > /sys/class/misc/touchboost_switch/touchboost_freq
+		echo "1056000" > /sys/class/misc/touchboost_switch/touchboost_freq_2
+        echo "500" > /sys/class/misc/touchboost_switch/touchboost_ms
+	
+	
 	# blu_active governor
 	echo "blu_active" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
 	echo "blu_active" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 	
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/use_sched_load 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/use_migration_notif 
+         
 		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/above_hispeed_delay 
 		echo "90"    >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/go_hispeed_load 
 		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_rate 
 		echo "979200">  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/hispeed_freq 
 		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/io_is_busy 
+		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/align_windows 
 		echo "80"    >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/target_loads 
-		echo "40000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/min_sample_time 
-		echo "80000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/max_freq_hysteresis 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/ignore_hispeed_on_notif
-		echo "80000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/boostpulse_duration 
-		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_slack 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/enable_prediction 
+		echo "40000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/min_sample_time  
+		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_slack
+		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane
+		echo "50"     > /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane_threshold 
 
-		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/use_sched_load 
-		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/use_migration_notif 
+
 		echo "20000 1400000:40000 1700000:20000 2100000:80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/above_hispeed_delay 
 		echo "90" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/go_hispeed_load 
 		echo "20000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/timer_rate 
 		echo "1286400" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/hispeed_freq 
 		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/io_is_busy 
+		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/align_windows 
 		echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/target_loads 
-		echo "40000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/min_sample_time 
-		echo "80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/max_freq_hysteresis 
-		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/ignore_hispeed_on_notif
-		echo "80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/boostpulse_duration 
+		echo "40000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/min_sample_time  
 		echo "20000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/timer_slack 
-		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/enable_prediction 
+		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/enable_prediction
+		echo "1"     >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/fastlane
+		echo "50"     > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/fastlane_threshold
 
 	# Ext4 tweaks default to on
 	/sbin/busybox sync
@@ -126,9 +150,7 @@
 		echo $(date) init.d script handling by kernel disabled >> $BOEFFLA_LOGFILE
 	fi
 
-# Wait for some time to ensure rom is fully initialized
-	echo $(date) Waiting a few more seconds... >> $BOEFFLA_LOGFILE
-	/sbin/busybox sleep 10
+
 
 # Interaction with Boeffla-Config app V2
 

@@ -650,20 +650,17 @@ if [ "apply_governor_profile" == "$1" ]; then
 	fi
 	
 		if [ "blu_active - standard" == "$2" ]; then
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/use_sched_load 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/use_migration_notif 
 		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/above_hispeed_delay 
 		echo "90"    >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/go_hispeed_load 
 		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_rate 
 		echo "979200">  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/hispeed_freq 
 		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/io_is_busy 
+		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/align_windows 
 		echo "80"    >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/target_loads 
-		echo "40000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/min_sample_time 
-		echo "80000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/max_freq_hysteresis 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/ignore_hispeed_on_notif
-		echo "80000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/boostpulse_duration 
-		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_slack 
-		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/enable_prediction 
+		echo "40000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/min_sample_time  
+		echo "20000" >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_slack
+		echo "1"     >  /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane
+		echo "50"     > /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane_threshold 
 
 		busybox sleep 0.5s
 		busybox sync
@@ -852,20 +849,18 @@ if [ "apply_governor_profile_2" == "$1" ]; then
 	fi
 
 	if [ "blu_active - standard" == "$2" ]; then
-		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/use_sched_load 
-		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/use_migration_notif 
 		echo "20000 1400000:40000 1700000:20000 2100000:80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/above_hispeed_delay 
 		echo "90" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/go_hispeed_load 
 		echo "20000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/timer_rate 
 		echo "1286400" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/hispeed_freq 
 		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/io_is_busy 
+		echo "1" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/align_windows 
 		echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/target_loads 
-		echo "40000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/min_sample_time 
-		echo "80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/max_freq_hysteresis 
-		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/ignore_hispeed_on_notif
-		echo "80000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/boostpulse_duration 
+		echo "40000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/min_sample_time  
 		echo "20000" > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/timer_slack 
-		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/enable_prediction 
+		echo "1" >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/enable_prediction
+		echo "1"     >  /sys/devices/system/cpu/cpu2/cpufreq/blu_active/fastlane
+		echo "50"     > /sys/devices/system/cpu/cpu2/cpufreq/blu_active/fastlane_threshold
 
 		busybox sleep 0.5s
 		busybox sync
