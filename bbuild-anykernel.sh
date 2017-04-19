@@ -12,6 +12,7 @@
 
 
 BOEFFLA_VERSION="UNOFFICIAL-Fusion-3.4"
+FILENAME="fusion-kernel-3.4-OnePlus3"
 
 TOOLCHAIN="/home/kenzolo/Rom/tool/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
 ARCHITECTURE=arm64
@@ -249,7 +250,7 @@ step4_prepare_anykernel()
 
 	# replace variables in anykernel script
 	cd $REPACK_PATH
-	KERNELNAME="Flashing $KERNEL_NAME $BOEFFLA_VERSION"
+	KERNELNAME="Flashing $FILENAME"
 	sed -i "s;###kernelname###;${KERNELNAME};" META-INF/com/google/android/update-binary;
 	COPYRIGHT="(c) Lord Boeffla (aka andip71), $(date +%Y.%m.%d-%H:%M:%S)"
 	sed -i "s;###copyright###;${COPYRIGHT};" META-INF/com/google/android/update-binary;
@@ -265,22 +266,22 @@ step5_create_anykernel_zip()
 
 	# create zip file
 	cd $REPACK_PATH
-	zip -r9 $BOEFFLA_FILENAME.recovery.zip * -x $BOEFFLA_FILENAME.recovery.zip
+	zip -r9 $FILENAME.recovery.zip * -x $FILENAME.recovery.zip
 
 	# sign recovery zip if there are keys available
 	if [ -f "$BUILD_PATH/tools_boeffla/testkey.x509.pem" ]; then
 		echo -e ">>> signing recovery zip\n"
-		java -jar $BUILD_PATH/tools_boeffla/signapk.jar -w $BUILD_PATH/tools_boeffla/testkey.x509.pem $BUILD_PATH/tools_boeffla/testkey.pk8 $BOEFFLA_FILENAME.recovery.zip $BOEFFLA_FILENAME.recovery.zip_signed
-		cp $BOEFFLA_FILENAME.recovery.zip_signed $BOEFFLA_FILENAME.recovery.zip
-		rm $BOEFFLA_FILENAME.recovery.zip_signed
+		java -jar $BUILD_PATH/tools_boeffla/signapk.jar -w $BUILD_PATH/tools_boeffla/testkey.x509.pem $BUILD_PATH/tools_boeffla/testkey.pk8 $FILENAME.recovery.zip $FILENAME.recovery.zip_signed
+		cp $FILENAME.recovery.zip_signed $FILENAME.recovery.zip
+		rm $FILENAME.recovery.zip_signed
 	fi
 
-	md5sum $BOEFFLA_FILENAME.recovery.zip > $BOEFFLA_FILENAME.recovery.zip.md5
+	md5sum $FILENAME.recovery.zip > $FILENAME.recovery.zip.md5
 
 	# Creating additional files for load&flash
 	echo -e ">>> create load&flash files\n"
 
-	cp $BOEFFLA_FILENAME.recovery.zip cm-kernel.zip
+	cp $FILENAME.recovery.zip cm-kernel.zip
 	md5sum cm-kernel.zip > checksum
 	cd /home/kenzolo/Rom/boeffla/boeffla-kernel-cm-oneplus3
 }
