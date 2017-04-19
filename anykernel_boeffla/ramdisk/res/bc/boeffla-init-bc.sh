@@ -85,8 +85,8 @@
     # Input boost configuration
 		echo "0:1056000 2:1056000" > /sys/module/cpu_boost/parameters/input_boost_freq
 		echo "500" > /sys/module/cpu_boost/parameters/input_boost_ms
-        echo "1" > /sys/class/misc/touchboost_switch/touchboost__switch
-        echo "1" > /sys/class/misc/touchboost_switch/touchboost__switch_2
+        echo "1" > /sys/class/misc/touchboost_switch/touchboost_switch
+        echo "1" > /sys/class/misc/touchboost_switch/touchboost_switch_2
 		echo "1056000" > /sys/class/misc/touchboost_switch/touchboost_freq
 		echo "1056000" > /sys/class/misc/touchboost_switch/touchboost_freq_2
         echo "500" > /sys/class/misc/touchboost_switch/touchboost_ms
