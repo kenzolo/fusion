@@ -11,8 +11,8 @@
 #######################################
 
 
-BOEFFLA_VERSION="UNOFFICIAL-Fusion-3.4"
-FILENAME="fusion-kernel-3.4-OnePlus3"
+BOEFFLA_VERSION="UNOFFICIAL-Fusion-3.5"
+FILENAME="fusion-kernel-3.5-OnePlus3"
 
 TOOLCHAIN="/home/kenzolo/Rom/tool/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
 ARCHITECTURE=arm64
