@@ -468,11 +468,6 @@ static int set_cpu_max_freq(const char *buf, const struct kernel_param *kp)
 	int ret;
 
 
-	// AP: do not allow max cpu freq to be changed anymore by this driver
-	if (touchboost == 0)
-		return 0;
-
-
 	while ((cp = strpbrk(cp + 1, " :")))
 		ntokens++;
 
